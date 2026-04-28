@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How NYC fixes a park</title>
+<link rel="stylesheet" href="https://use.typekit.net/qqk2vto.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    /* Vital City tokens */
+    --vc-black: #050507;
+    --vc-white: #ffffff;
+    --vc-cloud: #dddddd;
+    --vc-chartreuse: #dde44c;
+    --vc-orange: #ff7c53;
+    --vc-orange-20: #fde5dd;
+    --vc-orange-50: #fabcaa;
+    --vc-charcoal: #707175;
+    --vc-charcoal-20: #e2e3e2;
+    --vc-magenta: #e7466d;
+
+    --vc-font-sans: "halyard-text", "Inter", "Helvetica Neue", Arial, sans-serif;
+    --vc-font-serif: "GascogneTS", "Source Serif 4", Georgia, "Times New Roman", serif;
+
+    --vc-track-kicker: 0.08em;
+    --vc-track-caps: 0.04em;
+
+    --vc-shadow-pop: 6px 6px 0 var(--vc-chartreuse);
+  }
+
+  * { box-sizing: border-box; }
+
+  html, body { background: var(--vc-white); }
+
+  body {
+    margin: 0;
+    padding: 32px 16px;
+    font-family: var(--vc-font-sans);
+    color: var(--vc-black);
+    -webkit-font-smoothing: antialiased;
+    font-weight: 300;
+  }
+
+  .card {
+    max-width: 700px;
+    margin: 0 auto;
+    background: var(--vc-white);
+    border: 2px solid var(--vc-black);
+    border-radius: 0;
+  }
+
+  .hed {
+    background: var(--vc-black);
+    color: var(--vc-white);
+    padding: 32px 32px 28px;
+  }
+  .body {
+    padding: 28px 32px 28px;
+  }
+
+  .kicker {
+    font-family: var(--vc-font-sans);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: var(--vc-track-kicker);
+    text-transform: uppercase;
+    color: var(--vc-white);
+    margin-bottom: 14px;
+    display: inline-block;
+    border-bottom: 2px solid var(--vc-orange);
+    padding-bottom: 4px;
+  }
+
+  h1 {
+    font-family: var(--vc-font-serif);
+    font-weight: 400;
+    font-size: clamp(1.75rem, 2.6vw, 2.4rem);
+    line-height: 1.1;
+    margin: 8px 0 14px;
+    color: var(--vc-white);
+    letter-spacing: -0.01em;
+  }
+
+  .dek {
+    font-size: 1rem;
+    line-height: 1.55;
+    color: #c8c9cb;
+    margin: 0;
+    font-weight: 300;
+  }
+  .dek strong { color: var(--vc-white); font-weight: 700; }
+
+  hr.rule {
+    border: none;
+    border-top: 1px solid var(--vc-black);
+    margin: 24px 0;
+  }
+  hr.rule.bold {
+    border-top: 2px solid var(--vc-black);
+  }
+
+  /* Section heads */
+  .sec-head {
+    font-family: var(--vc-font-sans);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: var(--vc-track-kicker);
+    text-transform: uppercase;
+    color: var(--vc-black);
+    margin: 0 0 12px;
+  }
+
+  /* Timeline strip */
+  .timeline-wrap {
+    margin: 0 0 8px;
+  }
+  .timeline-label {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-size: 12px;
+    color: var(--vc-charcoal);
+    margin-bottom: 10px;
+    letter-spacing: var(--vc-track-caps);
+  }
+  .timeline-label .right { color: var(--vc-black); font-weight: 700; }
+
+  .timeline-bar {
+    display: flex;
+    width: 100%;
+    height: 30px;
+    border: 1px solid var(--vc-black);
+    margin-bottom: 8px;
+  }
+  .timeline-seg {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--vc-font-sans);
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--vc-black);
+    border-right: 1px solid var(--vc-black);
+  }
+  .timeline-seg:last-child { border-right: none; }
+  .timeline-seg.s1 { background: var(--vc-orange-20); flex: 2; }
+  .timeline-seg.s2 { background: var(--vc-orange-50); flex: 9; }
+  .timeline-seg.s3 { background: var(--vc-orange); color: var(--vc-white); flex: 18; }
+  .timeline-seg.s4 { background: var(--vc-orange-50); flex: 10; }
+  .timeline-seg.s5 { background: var(--vc-orange); color: var(--vc-white); flex: 18; }
+
+  .timeline-axis {
+    display: flex;
+    justify-content: space-between;
+    font-size: 10px;
+    color: var(--vc-charcoal);
+    letter-spacing: var(--vc-track-caps);
+    text-transform: uppercase;
+  }
+
+  /* Stats row */
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    margin: 0;
+    border-top: 2px solid var(--vc-black);
+    border-bottom: 2px solid var(--vc-black);
+  }
+  .stat {
+    padding: 16px 14px;
+    border-right: 1px solid var(--vc-black);
+  }
+  .stat:last-child { border-right: none; }
+  .stat-num {
+    font-family: var(--vc-font-serif);
+    font-size: 32px;
+    line-height: 1;
+    color: var(--vc-black);
+    margin-bottom: 8px;
+    letter-spacing: -0.02em;
+  }
+  .stat-num em {
+    font-style: normal;
+    background: var(--vc-chartreuse);
+    padding: 0 4px;
+  }
+  .stat-text {
+    font-size: 12px;
+    line-height: 1.4;
+    color: var(--vc-charcoal);
+  }
+
+  /* Cost table */
+  .costs {
+    margin: 24px 0 0;
+  }
+  .cost-row {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 12px;
+    align-items: baseline;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--vc-cloud);
+  }
+  .cost-row:last-child { border-bottom: none; }
+  .cost-type {
+    font-size: 14px;
+    color: var(--vc-black);
+    font-weight: 500;
+  }
+  .cost-note {
+    font-size: 11.5px;
+    color: var(--vc-charcoal);
+    font-weight: 300;
+    display: block;
+    margin-top: 2px;
+  }
+  .cost-amt {
+    font-family: var(--vc-font-serif);
+    font-size: 18px;
+    color: var(--vc-black);
+    white-space: nowrap;
+    letter-spacing: -0.01em;
+  }
+
+  /* Black callout module */
+  .module {
+    background: var(--vc-black);
+    color: var(--vc-white);
+    padding: 24px 24px 22px;
+    margin: 28px 0 0;
+  }
+  .module .sec-head { color: var(--vc-white); }
+  .module h3 {
+    font-family: var(--vc-font-serif);
+    font-size: 22px;
+    font-weight: 400;
+    line-height: 1.2;
+    margin: 6px 0 10px;
+    color: var(--vc-white);
+  }
+  .module p {
+    font-size: 14px;
+    line-height: 1.55;
+    color: #c8c9cb;
+    margin: 0 0 10px;
+    font-weight: 300;
+  }
+  .module p strong { color: var(--vc-white); font-weight: 700; }
+  .module .mini-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    margin-top: 14px;
+    border-top: 1px solid #2c2c2f;
+  }
+  .mini-stat {
+    padding: 14px 0 0;
+    padding-right: 14px;
+  }
+  .mini-stat + .mini-stat {
+    padding-left: 14px;
+    padding-right: 0;
+    border-left: 1px solid #2c2c2f;
+  }
+  .mini-num {
+    font-family: var(--vc-font-serif);
+    font-size: 26px;
+    line-height: 1;
+    color: var(--vc-orange);
+    margin-bottom: 6px;
+  }
+  .mini-text {
+    font-size: 11.5px;
+    line-height: 1.4;
+    color: #c8c9cb;
+  }
+
+  /* The threshold line */
+  .threshold {
+    margin: 24px 0 0;
+    padding: 14px 16px;
+    background: var(--vc-chartreuse);
+    color: var(--vc-black);
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 16px;
+    align-items: center;
+  }
+  .threshold-num {
+    font-family: var(--vc-font-serif);
+    font-size: 30px;
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+  .threshold-text {
+    font-size: 13px;
+    line-height: 1.45;
+  }
+  .threshold-text strong {
+    text-transform: uppercase;
+    letter-spacing: var(--vc-track-kicker);
+    font-size: 10.5px;
+    font-weight: 700;
+    display: block;
+    margin-bottom: 2px;
+  }
+
+  /* Phases */
+  .phases {
+    margin-top: 4px;
+  }
+
+  .phase {
+    display: grid;
+    grid-template-columns: 64px 1fr;
+    gap: 18px;
+    padding: 22px 0;
+    border-bottom: 1px solid var(--vc-cloud);
+  }
+  .phase:last-child { border-bottom: none; }
+
+  .phase-num {
+    font-family: var(--vc-font-serif);
+    font-size: 56px;
+    line-height: 0.9;
+    color: var(--vc-orange);
+    letter-spacing: -0.02em;
+    padding-top: 4px;
+  }
+
+  .phase-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 6px;
+    border-bottom: 1px solid var(--vc-black);
+    padding-bottom: 6px;
+  }
+  .phase-name {
+    font-family: var(--vc-font-serif);
+    font-size: 22px;
+    font-weight: 400;
+    color: var(--vc-black);
+    line-height: 1.1;
+  }
+  .phase-dur {
+    font-family: var(--vc-font-sans);
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--vc-black);
+    letter-spacing: var(--vc-track-kicker);
+    text-transform: uppercase;
+  }
+
+  .chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin: 10px 0 12px;
+  }
+  .chip {
+    font-size: 11px;
+    font-weight: 500;
+    padding: 3px 9px;
+    background: var(--vc-white);
+    color: var(--vc-black);
+    border: 1px solid var(--vc-black);
+    border-radius: 999px;
+    letter-spacing: 0.01em;
+  }
+
+  .phase-steps {
+    margin: 0 0 10px;
+    padding: 0;
+    list-style: none;
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--vc-black);
+    font-weight: 300;
+  }
+  .phase-steps li {
+    position: relative;
+    padding-left: 18px;
+    margin-bottom: 4px;
+  }
+  .phase-steps li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 9px;
+    width: 8px;
+    height: 2px;
+    background: var(--vc-orange);
+  }
+
+  .stall {
+    margin-top: 10px;
+    padding: 10px 12px;
+    background: var(--vc-chartreuse);
+    font-size: 12.5px;
+    line-height: 1.45;
+    color: var(--vc-black);
+  }
+  .stall strong {
+    font-family: var(--vc-font-sans);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: var(--vc-track-kicker);
+    font-size: 10.5px;
+    display: block;
+    margin-bottom: 3px;
+  }
+
+  /* Footer */
+  .footer {
+    margin-top: 8px;
+    padding-top: 18px;
+    border-top: 2px solid var(--vc-black);
+    font-size: 11.5px;
+    line-height: 1.6;
+    color: var(--vc-charcoal);
+  }
+  .footer a {
+    color: var(--vc-black);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 2px;
+  }
+  .footer a:hover { color: var(--vc-orange); }
+  .footer p { margin: 0 0 8px; }
+  .footer-label {
+    font-family: var(--vc-font-sans);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: var(--vc-track-kicker);
+    font-size: 10.5px;
+    color: var(--vc-black);
+    display: block;
+    margin-bottom: 4px;
+  }
+  .acronyms { font-size: 11px; color: var(--vc-charcoal); }
+
+  @media (max-width: 520px) {
+    .hed { padding: 26px 20px 22px; }
+    .body { padding: 22px 20px 22px; }
+    h1 { font-size: 1.6rem; }
+    .stats { grid-template-columns: 1fr; }
+    .stat { border-right: none; border-bottom: 1px solid var(--vc-black); }
+    .stat:last-child { border-bottom: none; }
+    .phase { grid-template-columns: 44px 1fr; gap: 14px; }
+    .phase-num { font-size: 42px; }
+    .timeline-seg { font-size: 10px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="card">
+
+  <div class="hed">
+    <div class="kicker">How NYC fixes a park</div>
+    <h1>The five gates between a community ask and a ribbon cutting</h1>
+    <p class="dek">A typical New York City park renovation passes through five sequential phases, six-plus agencies, and — usually — more than one round of funding. Median time from initial allocation to ribbon cutting: <strong>about 4.3 years</strong>. Complex projects routinely stretch to seven or eight.</p>
+  </div>
+
+  <div class="body">
+
+  <!-- Timeline strip -->
+  <div class="sec-head">Typical project clock</div>
+  <div class="timeline-wrap">
+    <div class="timeline-label">
+      <span>Five sequential phases, scaled to typical duration</span>
+      <span class="right">~4.3 yrs median &middot; 3 to 8+ yr range</span>
+    </div>
+    <div class="timeline-bar" role="img" aria-label="Five phases scaled by typical duration in months">
+      <div class="timeline-seg s1" title="Identify and scope: 1 to 3 months">1</div>
+      <div class="timeline-seg s2" title="Fund and adopt: 6 to 12 months">2</div>
+      <div class="timeline-seg s3" title="Design and review: 12 to 24 months">3</div>
+      <div class="timeline-seg s4" title="Bid and contract: 9 to 12 months">4</div>
+      <div class="timeline-seg s5" title="Build and open: 12 to 24 months">5</div>
+    </div>
+    <div class="timeline-axis">
+      <span>Year 0</span>
+      <span>Year 1</span>
+      <span>Year 2</span>
+      <span>Year 3</span>
+      <span>Year 4+</span>
+    </div>
+  </div>
+
+  <hr class="rule">
+
+  <!-- What it costs -->
+  <div class="sec-head" style="margin-top:32px">What a renovation costs</div>
+  <div class="costs">
+    <div class="cost-row">
+      <div>
+        <div class="cost-type">Playground reconstruction</div>
+        <div class="cost-note">e.g., Battery Playscape, Manhattan ($14M, high end)</div>
+      </div>
+      <div class="cost-amt">$2M – $14M</div>
+    </div>
+    <div class="cost-row">
+      <div>
+        <div class="cost-type">Comfort station / restroom</div>
+        <div class="cost-note">Fox Park, Bronx; Marcus Garvey, Manhattan ~$3M each</div>
+      </div>
+      <div class="cost-amt">$3M – $4M</div>
+    </div>
+    <div class="cost-row">
+      <div>
+        <div class="cost-type">Athletic field or synthetic turf</div>
+        <div class="cost-note">Single-field swap to multi-field complex</div>
+      </div>
+      <div class="cost-amt">$2.5M – $11M</div>
+    </div>
+    <div class="cost-row">
+      <div>
+        <div class="cost-type">Major destination or waterfront park</div>
+        <div class="cost-note">e.g., Andrew Haswell Green Park, East Midtown Greenway</div>
+      </div>
+      <div class="cost-amt">$40M – $200M+</div>
+    </div>
+    <div class="cost-row">
+      <div>
+        <div class="cost-type">Small in-house repair</div>
+        <div class="cost-note">DPR crews; below the capital threshold</div>
+      </div>
+      <div class="cost-amt">under $35K</div>
+    </div>
+  </div>
+
+  <!-- The $35K threshold -->
+  <div class="threshold">
+    <div class="threshold-num">$35K</div>
+    <div class="threshold-text">
+      <strong>The line</strong>
+      Anything $35,000 or more with a five-plus-year useful life is a "capital project" and must run this gantlet (Comptroller Directive 10). Below it, Parks fixes the problem with expense funding or in-house crews.
+    </div>
+  </div>
+
+  <!-- Initial vs. supplemental -->
+  <div class="module">
+    <div class="sec-head">The funding rarely lands once</div>
+    <h3>Most projects come back for more money</h3>
+    <p>Projects enter the city's Ten-Year Capital Strategy at <strong>placeholder amounts</strong> — early estimates that often underprice the work. When design comes in over budget, when bids land high, or when crews dig and find unmapped utilities, the project returns for a <strong>supplemental allocation</strong> in a later budget cycle. Council members frequently use their discretionary capital to top up stalled projects and push them over the line.</p>
+    <p>One common failure mode: design is funded in Phase 1, but construction is not. The renovation sits — fully designed, partially funded — for years.</p>
+    <div class="mini-stats">
+      <div class="mini-stat">
+        <div class="mini-num">63%</div>
+        <div class="mini-text">Of delayed NYC capital projects citywide also went over budget (State Comptroller, 2025).</div>
+      </div>
+      <div class="mini-stat">
+        <div class="mini-num">36%</div>
+        <div class="mini-text">Of NYC Parks' state-of-good-repair need is funded in the current Ten-Year Capital Strategy ($4.6B funded vs. ~$615M/year of need).</div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="rule bold" style="margin-top:32px">
+
+  <!-- Phases -->
+  <div class="phases">
+
+    <div class="phase">
+      <div class="phase-num">1</div>
+      <div>
+        <div class="phase-head">
+          <div class="phase-name">Identify and scope</div>
+          <div class="phase-dur">1–3 months</div>
+        </div>
+        <div class="chips">
+          <span class="chip">Community board</span>
+          <span class="chip">Council member</span>
+          <span class="chip">Borough president</span>
+          <span class="chip">DPR Capital Projects</span>
+          <span class="chip">Conservancy or partner</span>
+        </div>
+        <ul class="phase-steps">
+          <li>Local need surfaces — failing playground equipment, broken drainage, a neighborhood ask.</li>
+          <li>Department of Parks and Recreation (DPR) Capital Projects scopes the work and prepares a cost estimate.</li>
+          <li>An elected official or agency sponsor agrees to carry it into the budget.</li>
+        </ul>
+        <div class="stall"><strong>What can stall it</strong>Cost estimate too low to be credible, or no elected official willing to sponsor.</div>
+      </div>
+    </div>
+
+    <div class="phase">
+      <div class="phase-num">2</div>
+      <div>
+        <div class="phase-head">
+          <div class="phase-name">Fund and adopt</div>
+          <div class="phase-dur">6–12 months</div>
+        </div>
+        <div class="chips">
+          <span class="chip">City Council</span>
+          <span class="chip">Borough president</span>
+          <span class="chip">Mayor</span>
+          <span class="chip">OMB</span>
+          <span class="chip">Comptroller</span>
+        </div>
+        <ul class="phase-steps">
+          <li>Council and borough president discretionary capital, plus mayoral capital, flow into the Ten-Year Capital Strategy at placeholder amounts.</li>
+          <li>Project moves through Preliminary, Executive, and Adopted budget stages (February through June).</li>
+          <li>Comptroller registers the funds — only then can the money be spent. Most projects will need at least one supplemental allocation in a later year.</li>
+        </ul>
+        <div class="stall"><strong>What can stall it</strong>Initial allocation comes in below the project's true cost; design is funded but construction is not, leaving the project on the shelf.</div>
+      </div>
+    </div>
+
+    <div class="phase">
+      <div class="phase-num">3</div>
+      <div>
+        <div class="phase-head">
+          <div class="phase-name">Design and review</div>
+          <div class="phase-dur">12–24 months</div>
+        </div>
+        <div class="chips">
+          <span class="chip">DPR Capital or DDC</span>
+          <span class="chip">Public Design Commission</span>
+          <span class="chip">Community board</span>
+          <span class="chip">LPC if applicable</span>
+        </div>
+        <ul class="phase-steps">
+          <li>In-house DPR designers, the Department of Design and Construction (DDC), or outside consultants take it from concept to schematic to final drawings.</li>
+          <li>Public Design Commission (PDC) reviews; community board reviews; Landmarks Preservation Commission (LPC) reviews if the site is historic.</li>
+          <li>Final contract documents are produced for bidding.</li>
+        </ul>
+        <div class="stall"><strong>What can stall it</strong>Major revisions force a return trip to PDC; site surveys reveal contamination or utility issues.</div>
+      </div>
+    </div>
+
+    <div class="phase">
+      <div class="phase-num">4</div>
+      <div>
+        <div class="phase-head">
+          <div class="phase-name">Bid and contract</div>
+          <div class="phase-dur">9–12 months</div>
+        </div>
+        <div class="chips">
+          <span class="chip">DPR or DDC procurement</span>
+          <span class="chip">Comptroller</span>
+          <span class="chip">Bidding contractors</span>
+        </div>
+        <ul class="phase-steps">
+          <li>Project is publicly advertised; contractors submit sealed bids.</li>
+          <li>Lowest responsible, responsive bidder is selected and awarded the contract.</li>
+          <li>Comptroller registers the contract — the second registration step in the pipeline.</li>
+        </ul>
+        <div class="stall"><strong>What can stall it</strong>All bids come in over budget, requiring rescoping or rebidding; awarded contractor defaults.</div>
+      </div>
+    </div>
+
+    <div class="phase">
+      <div class="phase-num">5</div>
+      <div>
+        <div class="phase-head">
+          <div class="phase-name">Build and open</div>
+          <div class="phase-dur">12–24 months</div>
+        </div>
+        <div class="chips">
+          <span class="chip">Contractor</span>
+          <span class="chip">DPR construction oversight</span>
+          <span class="chip">Community</span>
+        </div>
+        <ul class="phase-steps">
+          <li>Mobilization, demolition, construction.</li>
+          <li>Punch list and final inspections.</li>
+          <li>Acceptance, sign-off, ribbon cutting.</li>
+        </ul>
+        <div class="stall"><strong>What can stall it</strong>Utility conflicts and unmapped infrastructure underground — the single largest driver of parks delays.</div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="footer">
+    <p><span class="footer-label">Sources</span><a href="https://www.nycgovparks.org/planning-and-building/capital-project-tracker">NYC Parks Capital Project Tracker</a> &middot; <a href="https://comptroller.nyc.gov/reports/audit-report-on-the-department-of-parks-and-recreations-oversight-of-capital-projects/">NYC Comptroller audit of DPR capital oversight</a> &middot; <a href="https://www.osc.ny.gov/files/reports/pdf/report-1-2025.pdf">State Comptroller, A Review of NYC Capital Project Delivery (2025)</a> &middot; <a href="https://www.ibo.nyc.ny.us/iboreports/one-percent-for-parks-a-historical-and-current-overview-of-the-parks-budget-june-2023.pdf">IBO, One Percent for Parks (2023)</a> &middot; <a href="https://nycfuture.org/research/fixing-nyc-parks-capital-construction-process-to-revitalize-aging-parks">Center for an Urban Future, Fixing NYC Parks Capital Construction</a> &middot; <a href="https://www.nyc.gov/site/designcommission/design-review/design-review.page">Public Design Commission</a></p>
+    <p class="acronyms"><span class="footer-label">Acronyms</span>DPR = Department of Parks and Recreation &middot; DDC = Department of Design and Construction &middot; OMB = Office of Management and Budget &middot; PDC = Public Design Commission &middot; LPC = Landmarks Preservation Commission.</p>
+    <p class="acronyms" style="margin-top:8px">Built with public data. See <a href="methodology.md">methodology</a> for durations, sources, and limitations.</p>
+  </div>
+
+  </div>
+</div>
+
+</body>
+</html>
