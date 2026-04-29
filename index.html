@@ -10,7 +10,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
 <style>
   :root {
-    /* Vital City tokens */
     --vc-black: #050507;
     --vc-white: #ffffff;
     --vc-cloud: #dddddd;
@@ -19,90 +18,137 @@
     --vc-orange-20: #fde5dd;
     --vc-orange-50: #fabcaa;
     --vc-charcoal: #707175;
-    --vc-charcoal-20: #e2e3e2;
-    --vc-magenta: #e7466d;
 
     --vc-font-sans: "halyard-text", "Inter", "Helvetica Neue", Arial, sans-serif;
     --vc-font-serif: "GascogneTS", "Source Serif 4", Georgia, "Times New Roman", serif;
 
     --vc-track-kicker: 0.08em;
     --vc-track-caps: 0.04em;
-
-    --vc-shadow-pop: 6px 6px 0 var(--vc-chartreuse);
   }
 
   * { box-sizing: border-box; }
-
-  html, body { background: var(--vc-white); }
-
+  html, body { background: #ffffff; }
   body {
     margin: 0;
-    padding: 32px 16px;
+    padding: 24px 12px 16px;
     font-family: var(--vc-font-sans);
     color: var(--vc-black);
     -webkit-font-smoothing: antialiased;
     font-weight: 300;
   }
 
-  .card {
-    max-width: 700px;
+  /* ================== DECK SHELL ================== */
+  .deck {
+    position: relative;
+    max-width: 720px;
     margin: 0 auto;
-    background: var(--vc-white);
-    border: 2px solid var(--vc-black);
-    border-radius: 0;
   }
+  .deck-track {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    border: 2px solid var(--vc-black);
+    background: var(--vc-white);
+    /* hide scrollbar */
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .deck-track::-webkit-scrollbar { display: none; }
 
-  .hed {
+  .card {
+    flex: 0 0 100%;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+    min-height: 540px;
+    display: flex;
+    flex-direction: column;
+    padding: 28px 32px 26px;
+    background: var(--vc-white);
+  }
+  .card.dark { background: var(--vc-black); color: var(--vc-white); }
+
+  /* Nav controls */
+  .deck-controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 10px;
+    gap: 12px;
+  }
+  .deck-btn {
+    appearance: none;
+    background: var(--vc-white);
+    color: var(--vc-black);
+    border: 1.5px solid var(--vc-black);
+    width: 36px;
+    height: 36px;
+    border-radius: 0;
+    font-size: 16px;
+    font-family: var(--vc-font-sans);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 120ms, color 120ms;
+    flex: 0 0 36px;
+  }
+  .deck-btn:hover:not(:disabled) {
     background: var(--vc-black);
     color: var(--vc-white);
-    padding: 32px 32px 28px;
   }
-  .body {
-    padding: 28px 32px 28px;
-  }
-
-  .kicker {
+  .deck-btn:disabled { opacity: 0.25; cursor: default; }
+  .deck-counter {
     font-family: var(--vc-font-sans);
-    font-size: 12px;
+    font-size: 11px;
     font-weight: 700;
     letter-spacing: var(--vc-track-kicker);
     text-transform: uppercase;
-    color: var(--vc-white);
-    margin-bottom: 14px;
+    color: var(--vc-charcoal);
+  }
+  .deck-counter strong { color: var(--vc-black); }
+  .deck-dots {
+    display: flex;
+    gap: 6px;
+    flex: 1;
+    justify-content: center;
+  }
+  .deck-dot {
+    width: 8px;
+    height: 8px;
+    border: 1px solid var(--vc-black);
+    background: transparent;
+    border-radius: 0;
+    padding: 0;
+    cursor: pointer;
+    transition: background 100ms;
+  }
+  .deck-dot.active { background: var(--vc-black); }
+  .deck-hint {
+    font-family: var(--vc-font-sans);
+    font-size: 10px;
+    color: var(--vc-charcoal);
+    text-align: center;
+    margin-top: 6px;
+    letter-spacing: var(--vc-track-caps);
+    text-transform: uppercase;
+  }
+
+  /* ================== TYPOGRAPHY ================== */
+  .kicker {
+    font-family: var(--vc-font-sans);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: var(--vc-track-kicker);
+    text-transform: uppercase;
+    color: var(--vc-black);
     display: inline-block;
     border-bottom: 2px solid var(--vc-orange);
-    padding-bottom: 4px;
+    padding-bottom: 3px;
+    margin-bottom: 10px;
   }
+  .card.dark .kicker { color: var(--vc-white); }
 
-  h1 {
-    font-family: var(--vc-font-serif);
-    font-weight: 400;
-    font-size: clamp(1.75rem, 2.6vw, 2.4rem);
-    line-height: 1.1;
-    margin: 8px 0 14px;
-    color: var(--vc-white);
-    letter-spacing: -0.01em;
-  }
-
-  .dek {
-    font-size: 1rem;
-    line-height: 1.55;
-    color: #c8c9cb;
-    margin: 0;
-    font-weight: 300;
-  }
-  .dek strong { color: var(--vc-white); font-weight: 700; }
-
-  hr.rule {
-    border: none;
-    border-top: 1px solid var(--vc-black);
-    margin: 24px 0;
-  }
-  hr.rule.bold {
-    border-top: 2px solid var(--vc-black);
-  }
-
-  /* Section heads */
   .sec-head {
     font-family: var(--vc-font-sans);
     font-size: 11px;
@@ -110,19 +156,71 @@
     letter-spacing: var(--vc-track-kicker);
     text-transform: uppercase;
     color: var(--vc-black);
-    margin: 0 0 8px;
-    padding-bottom: 6px;
+    margin: 0 0 10px;
+  }
+  .card.dark .sec-head { color: var(--vc-white); }
+
+  .h1 {
+    font-family: var(--vc-font-serif);
+    font-weight: 400;
+    font-size: 30px;
+    line-height: 1.08;
+    letter-spacing: -0.01em;
+    margin: 4px 0 12px;
+    color: var(--vc-black);
+  }
+  .card.dark .h1 { color: var(--vc-white); }
+
+  .dek {
+    font-size: 14.5px;
+    line-height: 1.5;
+    color: var(--vc-charcoal);
+    margin: 0;
+    font-weight: 300;
+  }
+  .dek strong { color: var(--vc-black); font-weight: 700; }
+  .card.dark .dek { color: #c8c9cb; }
+  .card.dark .dek strong { color: var(--vc-white); }
+
+  /* ================== CARD 1 — COVER ================== */
+  .cover { gap: 0; }
+  .cover .stat-strip {
+    margin-top: auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    border-top: 2px solid var(--vc-black);
+    border-bottom: 2px solid var(--vc-black);
+  }
+  .cover .stat-strip > div {
+    padding: 14px 12px;
+    border-right: 1px solid var(--vc-black);
+  }
+  .cover .stat-strip > div:last-child { border-right: none; }
+  .stat-num {
+    font-family: var(--vc-font-serif);
+    font-size: 28px;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    color: var(--vc-black);
+    margin-bottom: 6px;
+  }
+  .stat-num em {
+    font-style: normal;
+    background: var(--vc-chartreuse);
+    padding: 0 4px;
+  }
+  .stat-text {
+    font-size: 11.5px;
+    line-height: 1.4;
+    color: var(--vc-charcoal);
   }
 
-  /* Timeline strip */
-  .timeline-wrap {
-    margin: 0 0 8px;
-  }
+  /* ================== CARD 2 — TIMELINE ================== */
   .timeline-label {
     display: flex;
     justify-content: space-between;
     align-items: baseline;
-    font-size: 12px;
+    font-size: 11.5px;
     color: var(--vc-charcoal);
     margin-bottom: 10px;
     letter-spacing: var(--vc-track-caps);
@@ -132,7 +230,7 @@
   .timeline-bar {
     display: flex;
     width: 100%;
-    height: 30px;
+    height: 34px;
     border: 1px solid var(--vc-black);
     margin-bottom: 8px;
     position: relative;
@@ -143,7 +241,7 @@
     align-items: center;
     justify-content: center;
     font-family: var(--vc-font-sans);
-    font-size: 11px;
+    font-size: 12px;
     font-weight: 700;
     color: var(--vc-black);
     border-right: 1px solid var(--vc-black);
@@ -152,10 +250,7 @@
   }
   .timeline-seg:last-child { border-right: none; }
   .timeline-seg:hover { filter: brightness(0.92); }
-
-  /* Custom tooltip */
-  .timeline-seg::before,
-  .timeline-seg::after {
+  .timeline-seg::before, .timeline-seg::after {
     opacity: 0;
     pointer-events: none;
     transition: opacity 120ms;
@@ -187,13 +282,8 @@
     border-top-color: var(--vc-black);
     z-index: 10;
   }
-  .timeline-seg:hover::before,
-  .timeline-seg:hover::after,
-  .timeline-seg:focus::before,
-  .timeline-seg:focus::after {
-    opacity: 1;
-  }
-  /* Edge-clamping for first/last segment tooltips */
+  .timeline-seg:hover::before, .timeline-seg:hover::after,
+  .timeline-seg:focus::before, .timeline-seg:focus::after { opacity: 1; }
   .timeline-seg:first-child::before { left: 0; transform: none; }
   .timeline-seg:first-child::after { left: 14px; transform: none; }
   .timeline-seg:last-child::before { left: auto; right: 0; transform: none; }
@@ -203,7 +293,6 @@
   .timeline-seg.s3 { background: var(--vc-orange); color: var(--vc-white); flex: 18; }
   .timeline-seg.s4 { background: var(--vc-orange-50); flex: 10; }
   .timeline-seg.s5 { background: var(--vc-orange); color: var(--vc-white); flex: 18; }
-
   .timeline-axis {
     display: flex;
     justify-content: space-between;
@@ -212,130 +301,54 @@
     letter-spacing: var(--vc-track-caps);
     text-transform: uppercase;
   }
-
-  /* Stats row */
-  .stats {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 0;
-    margin: 0;
-    border-top: 2px solid var(--vc-black);
-    border-bottom: 2px solid var(--vc-black);
-  }
-  .stat {
-    padding: 16px 14px;
-    border-right: 1px solid var(--vc-black);
-  }
-  .stat:last-child { border-right: none; }
-  .stat-num {
-    font-family: var(--vc-font-serif);
-    font-size: 32px;
-    line-height: 1;
-    color: var(--vc-black);
-    margin-bottom: 8px;
-    letter-spacing: -0.02em;
-  }
-  .stat-num em {
-    font-style: normal;
-    background: var(--vc-chartreuse);
-    padding: 0 4px;
-  }
-  .stat-text {
+  .timeline-note {
+    margin-top: auto;
+    padding-top: 18px;
     font-size: 12px;
-    line-height: 1.4;
+    line-height: 1.5;
     color: var(--vc-charcoal);
+    border-top: 1px solid var(--vc-cloud);
   }
+  .timeline-note strong { color: var(--vc-black); font-weight: 700; }
 
-  /* Cost table */
-  .costs {
+  /* ================== TABLE ROWS (cards 3 and 5) ================== */
+  .rows {
     margin: 0;
     border-top: 1px solid var(--vc-black);
   }
-  .cost-row {
+  .row {
     display: grid;
     grid-template-columns: 1fr auto;
     gap: 12px;
     align-items: baseline;
-    padding: 12px 0;
+    padding: 10px 0;
     border-bottom: 1px solid var(--vc-cloud);
   }
-  .cost-row:last-child { border-bottom: none; }
-  .cost-type {
-    font-size: 14px;
+  .row:last-child { border-bottom: none; }
+  .row-type {
+    font-size: 13.5px;
     color: var(--vc-black);
     font-weight: 500;
   }
-  .cost-note {
+  .row-note {
     font-size: 11.5px;
     color: var(--vc-charcoal);
     font-weight: 300;
     display: block;
     margin-top: 2px;
+    line-height: 1.4;
   }
-  .cost-amt {
+  .row-amt {
     font-family: var(--vc-font-serif);
-    font-size: 18px;
+    font-size: 17px;
     color: var(--vc-black);
     white-space: nowrap;
     letter-spacing: -0.01em;
   }
 
-  /* Black callout module */
-  .module {
-    background: var(--vc-black);
-    color: var(--vc-white);
-    padding: 24px 24px 22px;
-    margin: 28px 0 0;
-  }
-  .module .sec-head { color: var(--vc-white); }
-  .module h3 {
-    font-family: var(--vc-font-serif);
-    font-size: 22px;
-    font-weight: 400;
-    line-height: 1.2;
-    margin: 6px 0 10px;
-    color: var(--vc-white);
-  }
-  .module p {
-    font-size: 14px;
-    line-height: 1.55;
-    color: #c8c9cb;
-    margin: 0 0 10px;
-    font-weight: 300;
-  }
-  .module p strong { color: var(--vc-white); font-weight: 700; }
-  .module .mini-stats {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0;
-    margin-top: 14px;
-    border-top: 1px solid #2c2c2f;
-  }
-  .mini-stat {
-    padding: 14px 0 0;
-    padding-right: 14px;
-  }
-  .mini-stat + .mini-stat {
-    padding-left: 14px;
-    padding-right: 0;
-    border-left: 1px solid #2c2c2f;
-  }
-  .mini-num {
-    font-family: var(--vc-font-serif);
-    font-size: 26px;
-    line-height: 1;
-    color: var(--vc-orange);
-    margin-bottom: 6px;
-  }
-  .mini-text {
-    font-size: 11.5px;
-    line-height: 1.4;
-    color: #c8c9cb;
-  }
-
-  /* The threshold line */
+  /* ================== CARD 3 — $50K threshold ================== */
   .threshold {
-    margin: 24px 0 0;
+    margin-top: auto;
     padding: 14px 16px;
     background: var(--vc-chartreuse);
     color: var(--vc-black);
@@ -350,10 +363,7 @@
     line-height: 1;
     letter-spacing: -0.02em;
   }
-  .threshold-text {
-    font-size: 13px;
-    line-height: 1.45;
-  }
+  .threshold-text { font-size: 12.5px; line-height: 1.45; }
   .threshold-text strong {
     text-transform: uppercase;
     letter-spacing: var(--vc-track-kicker);
@@ -363,45 +373,86 @@
     margin-bottom: 2px;
   }
 
-  /* Phases */
-  .phases {
-    margin-top: 4px;
+  /* ================== CARD 5 — SUPPLEMENTALS ================== */
+  .card.dark .sec-head { color: var(--vc-white); }
+  .supp-h2 {
+    font-family: var(--vc-font-serif);
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 1.15;
+    color: var(--vc-white);
+    margin: 6px 0 12px;
   }
-
-  .phase {
+  .supp-p {
+    font-size: 13.5px;
+    line-height: 1.55;
+    color: #c8c9cb;
+    margin: 0 0 10px;
+    font-weight: 300;
+  }
+  .supp-p strong { color: var(--vc-white); font-weight: 700; }
+  .mini-stats {
+    margin-top: auto;
     display: grid;
-    grid-template-columns: 64px 1fr;
-    gap: 18px;
-    padding: 22px 0;
-    border-bottom: 1px solid var(--vc-cloud);
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    border-top: 1px solid #2c2c2f;
+    padding-top: 14px;
   }
-  .phase:last-child { border-bottom: none; }
+  .mini-stat { padding-right: 12px; }
+  .mini-stat + .mini-stat {
+    padding-left: 12px;
+    padding-right: 0;
+    border-left: 1px solid #2c2c2f;
+  }
+  .mini-num {
+    font-family: var(--vc-font-serif);
+    font-size: 26px;
+    line-height: 1;
+    color: var(--vc-orange);
+    margin-bottom: 6px;
+  }
+  .mini-text {
+    font-size: 11px;
+    line-height: 1.4;
+    color: #c8c9cb;
+  }
 
+  /* ================== PHASE CARDS (6-10) ================== */
+  .phase-card { padding-top: 24px; }
+  .phase-head {
+    display: grid;
+    grid-template-columns: 84px 1fr;
+    gap: 18px;
+    align-items: end;
+    border-bottom: 2px solid var(--vc-black);
+    padding-bottom: 8px;
+    margin-bottom: 12px;
+  }
   .phase-num {
     font-family: var(--vc-font-serif);
-    font-size: 56px;
-    line-height: 0.9;
+    font-size: 76px;
+    line-height: 0.85;
     color: var(--vc-orange);
     letter-spacing: -0.02em;
-    padding-top: 4px;
   }
-
-  .phase-head {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    flex-wrap: wrap;
-    gap: 6px;
-    margin-bottom: 6px;
-    border-bottom: 1px solid var(--vc-black);
-    padding-bottom: 6px;
+  .phase-meta { padding-bottom: 4px; }
+  .phase-step-of {
+    font-family: var(--vc-font-sans);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: var(--vc-track-kicker);
+    text-transform: uppercase;
+    color: var(--vc-charcoal);
+    margin-bottom: 4px;
   }
   .phase-name {
     font-family: var(--vc-font-serif);
-    font-size: 22px;
+    font-size: 24px;
     font-weight: 400;
     color: var(--vc-black);
-    line-height: 1.1;
+    line-height: 1.05;
+    margin-bottom: 4px;
   }
   .phase-dur {
     font-family: var(--vc-font-sans);
@@ -411,12 +462,11 @@
     letter-spacing: var(--vc-track-kicker);
     text-transform: uppercase;
   }
-
   .chips {
     display: flex;
     flex-wrap: wrap;
     gap: 5px;
-    margin: 10px 0 12px;
+    margin: 0 0 12px;
   }
   .chip {
     font-size: 11px;
@@ -428,22 +478,21 @@
     border-radius: 999px;
     letter-spacing: 0.01em;
   }
-
-  .phase-steps {
-    margin: 0 0 10px;
+  .steps {
+    margin: 0 0 12px;
     padding: 0;
     list-style: none;
-    font-size: 14px;
+    font-size: 13.5px;
     line-height: 1.5;
     color: var(--vc-black);
     font-weight: 300;
   }
-  .phase-steps li {
+  .steps li {
     position: relative;
     padding-left: 18px;
     margin-bottom: 4px;
   }
-  .phase-steps li::before {
+  .steps li::before {
     content: '';
     position: absolute;
     left: 0;
@@ -452,12 +501,11 @@
     height: 2px;
     background: var(--vc-orange);
   }
-
   .stall {
-    margin-top: 10px;
+    margin-top: auto;
     padding: 10px 12px;
     background: var(--vc-chartreuse);
-    font-size: 12.5px;
+    font-size: 12px;
     line-height: 1.45;
     color: var(--vc-black);
   }
@@ -471,321 +519,406 @@
     margin-bottom: 3px;
   }
 
-  /* Footer */
+  /* ================== FOOTER OUTSIDE DECK ================== */
   .footer {
-    margin-top: 8px;
-    padding-top: 18px;
-    border-top: 2px solid var(--vc-black);
-    font-size: 11.5px;
-    line-height: 1.6;
+    max-width: 720px;
+    margin: 14px auto 0;
+    padding: 14px 4px 0;
+    font-size: 11px;
+    line-height: 1.55;
     color: var(--vc-charcoal);
+    border-top: 1px solid var(--vc-cloud);
   }
   .footer a {
     color: var(--vc-black);
     text-decoration: underline;
-    text-decoration-thickness: 1px;
     text-underline-offset: 2px;
   }
   .footer a:hover { color: var(--vc-orange); }
-  .footer p { margin: 0 0 8px; }
   .footer-label {
     font-family: var(--vc-font-sans);
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: var(--vc-track-kicker);
-    font-size: 10.5px;
+    font-size: 10px;
     color: var(--vc-black);
     display: block;
-    margin-bottom: 4px;
+    margin-bottom: 3px;
   }
-  .acronyms { font-size: 11px; color: var(--vc-charcoal); }
+  .footer p { margin: 0 0 6px; }
 
   @media (max-width: 520px) {
-    .hed { padding: 26px 20px 22px; }
-    .body { padding: 22px 20px 22px; }
-    h1 { font-size: 1.6rem; }
-    .stats { grid-template-columns: 1fr; }
-    .stat { border-right: none; border-bottom: 1px solid var(--vc-black); }
-    .stat:last-child { border-bottom: none; }
-    .phase { grid-template-columns: 44px 1fr; gap: 14px; }
-    .phase-num { font-size: 42px; }
-    .timeline-seg { font-size: 10px; }
+    .card { padding: 22px 20px 20px; min-height: 500px; }
+    .h1 { font-size: 24px; }
+    .phase-num { font-size: 56px; }
+    .phase-head { grid-template-columns: 64px 1fr; gap: 14px; }
+    .stat-num { font-size: 22px; }
+    .supp-h2 { font-size: 20px; }
   }
 </style>
 </head>
 <body>
 
-<div class="card">
+<div class="deck" id="deck">
 
-  <div class="hed">
-    <div class="kicker">How NYC fixes a park</div>
-    <h1>The five gates between a community ask and a ribbon cutting</h1>
-    <p class="dek">A typical New York City park renovation passes through five sequential phases, six-plus agencies, and — usually — more than one round of funding. Median time from initial allocation to ribbon cutting: <strong>about 4.3 years</strong>. Complex projects routinely stretch to seven or eight.</p>
-  </div>
+  <div class="deck-track" id="deckTrack" tabindex="0">
 
-  <div class="body">
+    <!-- =========================== CARD 1: COVER =========================== -->
+    <section class="card cover" aria-label="Cover">
+      <div class="kicker">How NYC fixes a park</div>
+      <h1 class="h1">The five gates between a community ask and a ribbon cutting</h1>
+      <p class="dek">A typical New York City park renovation passes through five sequential phases, six-plus agencies, and — usually — more than one round of funding. Median time from initial allocation to ribbon cutting: <strong>about 4.3 years</strong>. Complex projects routinely stretch to seven or eight.</p>
+      <div class="stat-strip">
+        <div>
+          <div class="stat-num"><em>4.3</em> yrs</div>
+          <div class="stat-text">Median time, request to ribbon cutting.</div>
+        </div>
+        <div>
+          <div class="stat-num">5</div>
+          <div class="stat-text">Sequential phases. Skipping any of them isn't an option.</div>
+        </div>
+        <div>
+          <div class="stat-num">6+</div>
+          <div class="stat-text">City agencies must sign off along the way.</div>
+        </div>
+      </div>
+    </section>
 
-  <!-- Timeline strip -->
-  <div class="sec-head">Typical project clock</div>
-  <div class="timeline-wrap">
-    <div class="timeline-label">
-      <span>Five sequential phases, scaled to typical duration</span>
-      <span class="right">~4.3 yrs median &middot; 3 to 8+ yr range</span>
-    </div>
-    <div class="timeline-bar" role="img" aria-label="Five phases scaled by typical duration in months">
-      <div class="timeline-seg s1" tabindex="0" data-name="Identify and scope" data-dur="1–3 months">1</div>
-      <div class="timeline-seg s2" tabindex="0" data-name="Fund and adopt" data-dur="6–12 months">2</div>
-      <div class="timeline-seg s3" tabindex="0" data-name="Design and review" data-dur="12–24 months">3</div>
-      <div class="timeline-seg s4" tabindex="0" data-name="Bid and contract" data-dur="9–12 months">4</div>
-      <div class="timeline-seg s5" tabindex="0" data-name="Build and open" data-dur="12–24 months">5</div>
-    </div>
-    <div class="timeline-axis">
-      <span>Year 0</span>
-      <span>Year 1</span>
-      <span>Year 2</span>
-      <span>Year 3</span>
-      <span>Year 4+</span>
-    </div>
-  </div>
+    <!-- =========================== CARD 2: TIMELINE =========================== -->
+    <section class="card" aria-label="Project clock">
+      <div class="sec-head">The project clock</div>
+      <h2 class="h1" style="font-size:24px; margin-bottom:14px">Five phases, scaled to typical duration</h2>
+      <div class="timeline-label">
+        <span>Hover or tap a phase number for details</span>
+        <span class="right">~4.3 yrs median &middot; 3 to 8+ yr range</span>
+      </div>
+      <div class="timeline-bar" role="img" aria-label="Five phases scaled by typical duration in months">
+        <div class="timeline-seg s1" tabindex="0" data-name="Identify and scope" data-dur="1–3 months">1</div>
+        <div class="timeline-seg s2" tabindex="0" data-name="Fund and adopt" data-dur="6–12 months">2</div>
+        <div class="timeline-seg s3" tabindex="0" data-name="Design and review" data-dur="12–24 months">3</div>
+        <div class="timeline-seg s4" tabindex="0" data-name="Bid and contract" data-dur="9–12 months">4</div>
+        <div class="timeline-seg s5" tabindex="0" data-name="Build and open" data-dur="12–24 months">5</div>
+      </div>
+      <div class="timeline-axis">
+        <span>Year 0</span><span>Year 1</span><span>Year 2</span><span>Year 3</span><span>Year 4+</span>
+      </div>
+      <div class="timeline-note">
+        Design, bidding, and construction together absorb most of the clock. <strong>Phase 3 (design and review)</strong> and <strong>Phase 5 (build and open)</strong> alone routinely run a year to two each, before any delays.
+      </div>
+    </section>
 
-  <hr class="rule">
+    <!-- =========================== CARD 3: COSTS + THRESHOLD =========================== -->
+    <section class="card" aria-label="What a renovation costs">
+      <div class="sec-head">What a renovation costs</div>
+      <h2 class="h1" style="font-size:22px; margin-bottom:14px">Typical price tags, by project type</h2>
+      <div class="rows">
+        <div class="row">
+          <div>
+            <div class="row-type">Playground reconstruction</div>
+            <div class="row-note">e.g., Battery Playscape, Manhattan ($14M, high end)</div>
+          </div>
+          <div class="row-amt">$2M – $14M</div>
+        </div>
+        <div class="row">
+          <div>
+            <div class="row-type">Comfort station / restroom</div>
+            <div class="row-note">Fox Park, Bronx; Marcus Garvey, Manhattan ~$3M each</div>
+          </div>
+          <div class="row-amt">$3M – $4M</div>
+        </div>
+        <div class="row">
+          <div>
+            <div class="row-type">Athletic field or synthetic turf</div>
+            <div class="row-note">Single-field swap to multi-field complex</div>
+          </div>
+          <div class="row-amt">$2.5M – $11M</div>
+        </div>
+        <div class="row">
+          <div>
+            <div class="row-type">Major destination or waterfront park</div>
+            <div class="row-note">Andrew Haswell Green Park; East Midtown Greenway</div>
+          </div>
+          <div class="row-amt">$40M – $200M+</div>
+        </div>
+        <div class="row">
+          <div>
+            <div class="row-type">Small in-house repair</div>
+            <div class="row-note">DPR crews; below the capital threshold</div>
+          </div>
+          <div class="row-amt">under $50K</div>
+        </div>
+      </div>
+      <div class="threshold">
+        <div class="threshold-num">$50K</div>
+        <div class="threshold-text">
+          <strong>The line</strong>
+          $50,000+ with a 5-year useful life = "capital project," and runs the full pipeline. Below it, Parks fixes the problem with expense funding or in-house crews.
+        </div>
+      </div>
+    </section>
 
-  <!-- What it costs -->
-  <div class="sec-head" style="margin-top:32px">What a renovation costs</div>
-  <div class="costs">
-    <div class="cost-row">
-      <div>
-        <div class="cost-type">Playground reconstruction</div>
-        <div class="cost-note">e.g., Battery Playscape, Manhattan ($14M, high end)</div>
+    <!-- =========================== CARD 4: FUNDING SOURCES =========================== -->
+    <section class="card" aria-label="Where the money comes from">
+      <div class="sec-head">Where the money comes from</div>
+      <h2 class="h1" style="font-size:22px; margin-bottom:14px">Five channels feed park capital</h2>
+      <div class="rows">
+        <div class="row">
+          <div>
+            <div class="row-type">Council "Reso A" capital</div>
+            <div class="row-note">51 members allocate discretionary capital to district projects; pooling is common for larger jobs.</div>
+          </div>
+          <div class="row-amt">district</div>
+        </div>
+        <div class="row">
+          <div>
+            <div class="row-type">Borough president capital</div>
+            <div class="row-note">By city charter, 5% of all city capital is reserved for the five borough presidents; ~46% of that has gone to parks, libraries, and culture.</div>
+          </div>
+          <div class="row-amt">borough</div>
+        </div>
+        <div class="row">
+          <div>
+            <div class="row-type">Mayoral strategic initiatives</div>
+            <div class="row-note">Top-down programs to balance discretionary inequities. Community Parks Initiative: $300M to 67 parks. Anchor Parks: $30M each, one per borough.</div>
+          </div>
+          <div class="row-amt">citywide</div>
+        </div>
+        <div class="row">
+          <div>
+            <div class="row-type">Participatory Budgeting (PBNYC)</div>
+            <div class="row-note">In opt-in council districts, residents (age 11+) directly vote on at least $1M of the member's capital.</div>
+          </div>
+          <div class="row-amt">district</div>
+        </div>
+        <div class="row">
+          <div>
+            <div class="row-type">Conservancies and "Friends of"</div>
+            <div class="row-note">Private match. Major-park conservancies (Central, Prospect, Riverside) move faster with private funds.</div>
+          </div>
+          <div class="row-amt">private</div>
+        </div>
       </div>
-      <div class="cost-amt">$2M – $14M</div>
-    </div>
-    <div class="cost-row">
-      <div>
-        <div class="cost-type">Comfort station / restroom</div>
-        <div class="cost-note">Fox Park, Bronx; Marcus Garvey, Manhattan ~$3M each</div>
-      </div>
-      <div class="cost-amt">$3M – $4M</div>
-    </div>
-    <div class="cost-row">
-      <div>
-        <div class="cost-type">Athletic field or synthetic turf</div>
-        <div class="cost-note">Single-field swap to multi-field complex</div>
-      </div>
-      <div class="cost-amt">$2.5M – $11M</div>
-    </div>
-    <div class="cost-row">
-      <div>
-        <div class="cost-type">Major destination or waterfront park</div>
-        <div class="cost-note">e.g., Andrew Haswell Green Park, East Midtown Greenway</div>
-      </div>
-      <div class="cost-amt">$40M – $200M+</div>
-    </div>
-    <div class="cost-row">
-      <div>
-        <div class="cost-type">Small in-house repair</div>
-        <div class="cost-note">DPR crews; below the capital threshold</div>
-      </div>
-      <div class="cost-amt">under $50K</div>
-    </div>
-  </div>
+    </section>
 
-  <!-- The $50K threshold -->
-  <div class="threshold">
-    <div class="threshold-num">$50K</div>
-    <div class="threshold-text">
-      <strong>The line</strong>
-      Anything $50,000 or more with a five-plus-year useful life is a "capital project" and must run this gantlet (Comptroller Directive 10; NY State Constitution debt rules). Below it, Parks fixes the problem with expense funding or in-house crews.
-    </div>
-  </div>
+    <!-- =========================== CARD 5: SUPPLEMENTALS =========================== -->
+    <section class="card dark" aria-label="The funding rarely lands once">
+      <div class="kicker" style="color:var(--vc-white); border-bottom-color:var(--vc-orange)">The funding rarely lands once</div>
+      <h2 class="supp-h2">Most projects come back for more money</h2>
+      <p class="supp-p">Projects enter the city's Ten-Year Capital Strategy at <strong>placeholder amounts</strong> — early estimates that often underprice the work. When design comes in over budget, when bids land high, or when crews dig and find unmapped utilities, the project returns for a <strong>supplemental allocation</strong> in a later budget cycle.</p>
+      <p class="supp-p">One common failure mode: design is funded but construction isn't. The renovation sits — fully designed, partially funded — for years.</p>
+      <div class="mini-stats">
+        <div class="mini-stat">
+          <div class="mini-num">63%</div>
+          <div class="mini-text">Of delayed NYC capital projects citywide also went over budget (State Comptroller, 2025).</div>
+        </div>
+        <div class="mini-stat">
+          <div class="mini-num">36%</div>
+          <div class="mini-text">Of NYC Parks' state-of-good-repair need is funded in the current Ten-Year Capital Strategy.</div>
+        </div>
+      </div>
+    </section>
 
-  <!-- Where the money comes from -->
-  <div class="sec-head" style="margin-top:32px">Where the money comes from</div>
-  <div class="costs">
-    <div class="cost-row">
-      <div>
-        <div class="cost-type">Council "Reso A" capital</div>
-        <div class="cost-note">51 members allocate discretionary capital to district projects; pooling across members is common for larger jobs.</div>
-      </div>
-      <div class="cost-amt">district</div>
-    </div>
-    <div class="cost-row">
-      <div>
-        <div class="cost-type">Borough president capital</div>
-        <div class="cost-note">By city charter, 5% of total city capital appropriations are reserved for the five borough presidents; historically ~46% of that has gone to parks, libraries, and cultural sites.</div>
-      </div>
-      <div class="cost-amt">borough</div>
-    </div>
-    <div class="cost-row">
-      <div>
-        <div class="cost-type">Mayoral strategic initiatives</div>
-        <div class="cost-note">Top-down programs to balance discretionary inequities. Community Parks Initiative: $300M to 67 underserved parks. Anchor Parks: $30M each to one major park per borough.</div>
-      </div>
-      <div class="cost-amt">citywide</div>
-    </div>
-    <div class="cost-row">
-      <div>
-        <div class="cost-type">Participatory Budgeting (PBNYC)</div>
-        <div class="cost-note">In opt-in council districts, residents (age 11+) directly vote on at least $1M of the member's capital. Good for mid-range fixes — courts, spray showers — that are too small for citywide programs.</div>
-      </div>
-      <div class="cost-amt">district</div>
-    </div>
-    <div class="cost-row">
-      <div>
-        <div class="cost-type">Conservancies and "Friends of"</div>
-        <div class="cost-note">Private match. Major-park conservancies (Central, Prospect, Riverside) can move faster using private funds; small "Friends of" groups mostly lobby for Reso A.</div>
-      </div>
-      <div class="cost-amt">private</div>
-    </div>
-  </div>
-
-  <!-- Initial vs. supplemental -->
-  <div class="module">
-    <div class="sec-head">The funding rarely lands once</div>
-    <h3>Most projects come back for more money</h3>
-    <p>Projects enter the city's Ten-Year Capital Strategy at <strong>placeholder amounts</strong> — early estimates that often underprice the work. When design comes in over budget, when bids land high, or when crews dig and find unmapped utilities, the project returns for a <strong>supplemental allocation</strong> in a later budget cycle. Council members frequently use their discretionary capital to top up stalled projects and push them over the line.</p>
-    <p>One common failure mode: design is funded in Phase 1, but construction is not. The renovation sits — fully designed, partially funded — for years.</p>
-    <div class="mini-stats">
-      <div class="mini-stat">
-        <div class="mini-num">63%</div>
-        <div class="mini-text">Of delayed NYC capital projects citywide also went over budget (State Comptroller, 2025).</div>
-      </div>
-      <div class="mini-stat">
-        <div class="mini-num">36%</div>
-        <div class="mini-text">Of NYC Parks' state-of-good-repair need is funded in the current Ten-Year Capital Strategy ($4.6B funded vs. ~$615M/year of need).</div>
-      </div>
-    </div>
-  </div>
-
-  <hr class="rule bold" style="margin-top:32px">
-
-  <!-- Phases -->
-  <div class="phases">
-
-    <div class="phase">
-      <div class="phase-num">1</div>
-      <div>
-        <div class="phase-head">
+    <!-- =========================== CARD 6: PHASE 1 =========================== -->
+    <section class="card phase-card" aria-label="Phase 1: Identify and scope">
+      <div class="phase-head">
+        <div class="phase-num">1</div>
+        <div class="phase-meta">
+          <div class="phase-step-of">Phase 1 of 5</div>
           <div class="phase-name">Identify and scope</div>
           <div class="phase-dur">1–3 months</div>
         </div>
-        <div class="chips">
-          <span class="chip">Community board</span>
-          <span class="chip">Council member</span>
-          <span class="chip">Borough president</span>
-          <span class="chip">DPR Capital Projects</span>
-          <span class="chip">Conservancy or partner</span>
-        </div>
-        <ul class="phase-steps">
-          <li>Local need surfaces — failing playground equipment, broken drainage, a neighborhood ask.</li>
-          <li>Department of Parks and Recreation (DPR) Capital Projects scopes the work and prepares a cost estimate.</li>
-          <li>An elected official or agency sponsor agrees to carry it into the budget.</li>
-        </ul>
-        <div class="stall"><strong>What can stall it</strong>Cost estimate too low to be credible, or no elected official willing to sponsor.</div>
       </div>
-    </div>
+      <div class="chips">
+        <span class="chip">Community board</span>
+        <span class="chip">Council member</span>
+        <span class="chip">Borough president</span>
+        <span class="chip">DPR Capital Projects</span>
+        <span class="chip">Conservancy or partner</span>
+      </div>
+      <ul class="steps">
+        <li>Local need surfaces — failing playground equipment, broken drainage, a neighborhood ask.</li>
+        <li>Department of Parks and Recreation (DPR) Capital Projects scopes the work and prepares a cost estimate.</li>
+        <li>An elected official or agency sponsor agrees to carry it into the budget.</li>
+      </ul>
+      <div class="stall"><strong>What can stall it</strong>Cost estimate too low to be credible, or no elected official willing to sponsor.</div>
+    </section>
 
-    <div class="phase">
-      <div class="phase-num">2</div>
-      <div>
-        <div class="phase-head">
+    <!-- =========================== CARD 7: PHASE 2 =========================== -->
+    <section class="card phase-card" aria-label="Phase 2: Fund and adopt">
+      <div class="phase-head">
+        <div class="phase-num">2</div>
+        <div class="phase-meta">
+          <div class="phase-step-of">Phase 2 of 5</div>
           <div class="phase-name">Fund and adopt</div>
           <div class="phase-dur">6–12 months</div>
         </div>
-        <div class="chips">
-          <span class="chip">City Council</span>
-          <span class="chip">Borough president</span>
-          <span class="chip">Mayor</span>
-          <span class="chip">OMB</span>
-          <span class="chip">Comptroller</span>
-        </div>
-        <ul class="phase-steps">
-          <li>Council "Reso A" capital, the borough president's 5% set-aside, and mayoral capital flow into the Ten-Year Capital Strategy — usually at placeholder amounts that pre-date detailed scoping.</li>
-          <li>Project moves through Preliminary, Executive, and Adopted budget stages (February through June).</li>
-          <li>Comptroller registers the funds. Most projects come back for at least one supplemental allocation in a later budget year.</li>
-        </ul>
-        <div class="stall"><strong>What can stall it</strong>Initial allocation comes in below the project's true cost; design is funded but construction is not, leaving the project on the shelf.</div>
       </div>
-    </div>
+      <div class="chips">
+        <span class="chip">City Council</span>
+        <span class="chip">Borough president</span>
+        <span class="chip">Mayor</span>
+        <span class="chip">OMB</span>
+        <span class="chip">Comptroller</span>
+      </div>
+      <ul class="steps">
+        <li>Council "Reso A," the borough president's 5% set-aside, and mayoral capital flow into the Ten-Year Capital Strategy — usually at placeholder amounts.</li>
+        <li>Project moves through Preliminary, Executive, and Adopted budget stages (February through June).</li>
+        <li>Comptroller registers the funds. Most projects come back for at least one supplemental in a later year.</li>
+      </ul>
+      <div class="stall"><strong>What can stall it</strong>Initial allocation comes in below the project's true cost; design is funded but construction is not, leaving the project on the shelf.</div>
+    </section>
 
-    <div class="phase">
-      <div class="phase-num">3</div>
-      <div>
-        <div class="phase-head">
+    <!-- =========================== CARD 8: PHASE 3 =========================== -->
+    <section class="card phase-card" aria-label="Phase 3: Design and review">
+      <div class="phase-head">
+        <div class="phase-num">3</div>
+        <div class="phase-meta">
+          <div class="phase-step-of">Phase 3 of 5</div>
           <div class="phase-name">Design and review</div>
           <div class="phase-dur">12–24 months</div>
         </div>
-        <div class="chips">
-          <span class="chip">DPR Capital or DDC</span>
-          <span class="chip">Public Design Commission</span>
-          <span class="chip">Community board</span>
-          <span class="chip">DEP, DOB, DOT permits</span>
-          <span class="chip">LPC if applicable</span>
-        </div>
-        <ul class="phase-steps">
-          <li>In-house DPR designers, the Department of Design and Construction (DDC), or outside consultants take it from concept to schematic to final drawings.</li>
-          <li>Public Design Commission (PDC) reviews; community board reviews; Landmarks Preservation Commission (LPC) reviews if the site is historic.</li>
-          <li>Final contract documents are produced for bidding.</li>
-        </ul>
-        <div class="stall"><strong>What can stall it</strong>Cross-agency permits (Environmental Protection, Buildings, Transportation) can add 3 to 9 months on their own; major revisions force a return trip to PDC; surveys reveal contamination or utility issues.</div>
       </div>
-    </div>
+      <div class="chips">
+        <span class="chip">DPR Capital or DDC</span>
+        <span class="chip">Public Design Commission</span>
+        <span class="chip">Community board</span>
+        <span class="chip">DEP, DOB, DOT permits</span>
+        <span class="chip">LPC if applicable</span>
+      </div>
+      <ul class="steps">
+        <li>In-house DPR designers, the Department of Design and Construction (DDC), or outside consultants take it from concept to schematic to final drawings.</li>
+        <li>Public Design Commission reviews; community board reviews; Landmarks Preservation Commission reviews if the site is historic.</li>
+        <li>Final contract documents are produced for bidding.</li>
+      </ul>
+      <div class="stall"><strong>What can stall it</strong>Cross-agency permits (Environmental Protection, Buildings, Transportation) can add 3 to 9 months on their own; major revisions force a return trip to the design commission.</div>
+    </section>
 
-    <div class="phase">
-      <div class="phase-num">4</div>
-      <div>
-        <div class="phase-head">
+    <!-- =========================== CARD 9: PHASE 4 =========================== -->
+    <section class="card phase-card" aria-label="Phase 4: Bid and contract">
+      <div class="phase-head">
+        <div class="phase-num">4</div>
+        <div class="phase-meta">
+          <div class="phase-step-of">Phase 4 of 5</div>
           <div class="phase-name">Bid and contract</div>
           <div class="phase-dur">9–12 months</div>
         </div>
-        <div class="chips">
-          <span class="chip">DPR or DDC procurement</span>
-          <span class="chip">OMB</span>
-          <span class="chip">Law Department</span>
-          <span class="chip">MOCS</span>
-          <span class="chip">Comptroller</span>
-          <span class="chip">Bidding contractors</span>
-        </div>
-        <ul class="phase-steps">
-          <li>OMB issues a "Certificate to Proceed" confirming the project is capitally eligible and adequately funded — required before bidding.</li>
-          <li>Project is publicly advertised; sealed bids open; lowest responsible, responsive bidder wins.</li>
-          <li>Contract is registered with the Comptroller — the second of the two registration gates. Roughly 80% of city contracts arrive at the Comptroller's office already past their planned start date.</li>
-        </ul>
-        <div class="stall"><strong>What can stall it</strong>All bids come in over budget, sending the project back to OMB for more money or back to design for a rescope; awarded contractor defaults.</div>
       </div>
-    </div>
+      <div class="chips">
+        <span class="chip">DPR or DDC procurement</span>
+        <span class="chip">OMB</span>
+        <span class="chip">Law Department</span>
+        <span class="chip">MOCS</span>
+        <span class="chip">Comptroller</span>
+        <span class="chip">Bidding contractors</span>
+      </div>
+      <ul class="steps">
+        <li>OMB issues a "Certificate to Proceed" confirming the project is capitally eligible and adequately funded — required before bidding.</li>
+        <li>Project is publicly advertised; sealed bids open; lowest responsible, responsive bidder wins.</li>
+        <li>Contract is registered with the Comptroller. Roughly 80% of city contracts arrive at the Comptroller's office already past their planned start date.</li>
+      </ul>
+      <div class="stall"><strong>What can stall it</strong>All bids come in over budget, sending the project back to OMB for more money or back to design for a rescope; awarded contractor defaults.</div>
+    </section>
 
-    <div class="phase">
-      <div class="phase-num">5</div>
-      <div>
-        <div class="phase-head">
+    <!-- =========================== CARD 10: PHASE 5 =========================== -->
+    <section class="card phase-card" aria-label="Phase 5: Build and open">
+      <div class="phase-head">
+        <div class="phase-num">5</div>
+        <div class="phase-meta">
+          <div class="phase-step-of">Phase 5 of 5</div>
           <div class="phase-name">Build and open</div>
           <div class="phase-dur">12–24 months</div>
         </div>
-        <div class="chips">
-          <span class="chip">Contractor</span>
-          <span class="chip">DPR construction oversight</span>
-          <span class="chip">Community</span>
-        </div>
-        <ul class="phase-steps">
-          <li>Mobilization, demolition, construction.</li>
-          <li>Punch list and final inspections.</li>
-          <li>Acceptance, sign-off, ribbon cutting.</li>
-        </ul>
-        <div class="stall"><strong>What can stall it</strong>Utility conflicts and unmapped infrastructure underground — the single largest driver of parks delays. The Capital Process Reform Task Force estimated such disputes can cost up to $200,000 per month per stalled project.</div>
       </div>
-    </div>
+      <div class="chips">
+        <span class="chip">Contractor</span>
+        <span class="chip">DPR construction oversight</span>
+        <span class="chip">Community</span>
+      </div>
+      <ul class="steps">
+        <li>Mobilization, demolition, construction.</li>
+        <li>Punch list and final inspections.</li>
+        <li>Acceptance, sign-off, ribbon cutting.</li>
+      </ul>
+      <div class="stall"><strong>What can stall it</strong>Utility conflicts and unmapped infrastructure underground — the single largest driver of parks delays. The Capital Process Reform Task Force estimated such disputes can cost up to $200,000 per month per stalled project.</div>
+    </section>
 
-  </div>
+  </div><!-- /deck-track -->
 
-  <div class="footer">
-    <p><span class="footer-label">Sources</span><a href="https://www.nycgovparks.org/planning-and-building/capital-project-tracker">NYC Parks Capital Project Tracker</a> &middot; <a href="https://comptroller.nyc.gov/reports/audit-report-on-the-department-of-parks-and-recreations-oversight-of-capital-projects/">NYC Comptroller audit of DPR capital oversight</a> &middot; <a href="https://www.osc.ny.gov/files/reports/pdf/report-1-2025.pdf">State Comptroller, A Review of NYC Capital Project Delivery (2025)</a> &middot; <a href="https://www.ibo.nyc.ny.us/iboreports/one-percent-for-parks-a-historical-and-current-overview-of-the-parks-budget-june-2023.pdf">IBO, One Percent for Parks (2023)</a> &middot; <a href="https://nycfuture.org/research/fixing-nyc-parks-capital-construction-process-to-revitalize-aging-parks">Center for an Urban Future, Fixing NYC Parks Capital Construction</a> &middot; <a href="https://www.nyc.gov/site/designcommission/design-review/design-review.page">Public Design Commission</a></p>
-    <p class="acronyms"><span class="footer-label">Acronyms</span>DPR = Department of Parks and Recreation &middot; DDC = Department of Design and Construction &middot; OMB = Office of Management and Budget &middot; PDC = Public Design Commission &middot; LPC = Landmarks Preservation Commission.</p>
-    <p class="acronyms" style="margin-top:8px">Built with public data. See <a href="methodology.md">methodology</a> for durations, sources, and limitations.</p>
+  <div class="deck-controls">
+    <button class="deck-btn" id="deckPrev" aria-label="Previous card">←</button>
+    <div class="deck-dots" id="deckDots" role="tablist" aria-label="Card navigation"></div>
+    <span class="deck-counter"><strong id="deckCurrent">1</strong> / <span id="deckTotal">10</span></span>
+    <button class="deck-btn" id="deckNext" aria-label="Next card">→</button>
   </div>
+  <div class="deck-hint">Swipe, scroll, or use arrow keys</div>
 
-  </div>
 </div>
+
+<div class="footer">
+  <p><span class="footer-label">Sources</span><a href="https://www.nycgovparks.org/planning-and-building/capital-project-tracker">NYC Parks Capital Project Tracker</a> &middot; <a href="https://comptroller.nyc.gov/reports/audit-report-on-the-department-of-parks-and-recreations-oversight-of-capital-projects/">NYC Comptroller audit of DPR capital oversight</a> &middot; <a href="https://www.osc.ny.gov/files/reports/pdf/report-1-2025.pdf">State Comptroller, A Review of NYC Capital Project Delivery (2025)</a> &middot; <a href="https://www.ibo.nyc.ny.us/iboreports/one-percent-for-parks-a-historical-and-current-overview-of-the-parks-budget-june-2023.pdf">IBO, One Percent for Parks (2023)</a> &middot; <a href="https://nycfuture.org/research/fixing-nyc-parks-capital-construction-process-to-revitalize-aging-parks">Center for an Urban Future</a></p>
+  <p><span class="footer-label">Acronyms</span>DPR = Department of Parks and Recreation &middot; DDC = Department of Design and Construction &middot; OMB = Office of Management and Budget &middot; PDC = Public Design Commission &middot; LPC = Landmarks Preservation Commission &middot; MOCS = Mayor's Office of Contract Services.</p>
+  <p style="margin-top:8px">Built with public data. See <a href="full.html">long-form version</a> or the <a href="methodology.md">methodology</a> for sources, durations, and limitations.</p>
+</div>
+
+<script>
+  (function() {
+    const track = document.getElementById('deckTrack');
+    const cards = track.querySelectorAll('.card');
+    const total = cards.length;
+    const dotsEl = document.getElementById('deckDots');
+    const prevBtn = document.getElementById('deckPrev');
+    const nextBtn = document.getElementById('deckNext');
+    const currentEl = document.getElementById('deckCurrent');
+    const totalEl = document.getElementById('deckTotal');
+
+    totalEl.textContent = total;
+
+    // Build dots
+    for (let i = 0; i < total; i++) {
+      const b = document.createElement('button');
+      b.className = 'deck-dot' + (i === 0 ? ' active' : '');
+      b.setAttribute('role', 'tab');
+      b.setAttribute('aria-label', 'Go to card ' + (i + 1));
+      b.addEventListener('click', () => goTo(i));
+      dotsEl.appendChild(b);
+    }
+    const dots = dotsEl.querySelectorAll('.deck-dot');
+
+    function currentIndex() {
+      return Math.round(track.scrollLeft / track.clientWidth);
+    }
+    function goTo(i) {
+      i = Math.max(0, Math.min(total - 1, i));
+      track.scrollTo({ left: i * track.clientWidth, behavior: 'smooth' });
+    }
+    function update() {
+      const i = currentIndex();
+      currentEl.textContent = i + 1;
+      dots.forEach((d, j) => d.classList.toggle('active', j === i));
+      prevBtn.disabled = i === 0;
+      nextBtn.disabled = i === total - 1;
+    }
+
+    prevBtn.addEventListener('click', () => goTo(currentIndex() - 1));
+    nextBtn.addEventListener('click', () => goTo(currentIndex() + 1));
+
+    track.addEventListener('scroll', () => {
+      window.requestAnimationFrame(update);
+    }, { passive: true });
+
+    track.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowLeft') { e.preventDefault(); goTo(currentIndex() - 1); }
+      else if (e.key === 'ArrowRight') { e.preventDefault(); goTo(currentIndex() + 1); }
+    });
+
+    // Recompute on resize
+    window.addEventListener('resize', () => {
+      track.scrollTo({ left: currentIndex() * track.clientWidth });
+    });
+
+    update();
+  })();
+</script>
 
 </body>
 </html>
