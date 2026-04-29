@@ -110,7 +110,8 @@
     letter-spacing: var(--vc-track-kicker);
     text-transform: uppercase;
     color: var(--vc-black);
-    margin: 0 0 12px;
+    margin: 0 0 8px;
+    padding-bottom: 6px;
   }
 
   /* Timeline strip */
@@ -196,14 +197,15 @@
 
   /* Cost table */
   .costs {
-    margin: 24px 0 0;
+    margin: 0;
+    border-top: 1px solid var(--vc-black);
   }
   .cost-row {
     display: grid;
     grid-template-columns: 1fr auto;
     gap: 12px;
     align-items: baseline;
-    padding: 10px 0;
+    padding: 12px 0;
     border-bottom: 1px solid var(--vc-cloud);
   }
   .cost-row:last-child { border-bottom: none; }
