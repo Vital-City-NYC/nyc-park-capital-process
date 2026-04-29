@@ -31,11 +31,29 @@ Sources are recent NYC examples from the NYC Parks Capital Project Tracker, agen
 | Major destination / waterfront | $40M – $200M+ | Andrew Haswell Green + East Midtown Greenway: $197.6M combined. High Line: $115M city investment. |
 | Small in-house repair | under $35K | Below the capital threshold; handled with expense funding or DPR crews. |
 
-## The $35K threshold
+## The $50K threshold
 
-NYC Comptroller Directive #10 sets the capital project minimum at **$35,000** with a **5-year minimum useful life**. Anything that doesn't clear both bars is funded out of expense (operating) money or handled by in-house Parks crews — and does not run the full pipeline shown in the infographic.
+To be eligible for capital (bond-financed) funding, a park improvement must clear three bars per NYC Comptroller Directive #10 and the NY State Constitution's debt rules:
+
+1. **Asset value of at least $50,000.**
+2. **Useful life of at least five years** (three years for IT equipment).
+3. **A discrete physical improvement**, not routine maintenance.
+
+Anything below those thresholds is funded out of the **expense budget** (operating money) or handled by in-house Parks crews. It does not run the full pipeline shown in the infographic.
+
+A note on the threshold figure: an earlier draft of this graphic used $35,000, citing summary descriptions of Directive 10. The more authoritative reading — confirmed in recent research and used in NYC capital planning practice — is $50,000. The methodology was updated to match.
 
 The in-house-vs-contractor and DPR-vs-DDC handoff thresholds are *not* published. The infographic does not assert specific dollar lines for these; the agencies make the call internally.
+
+## Where the money comes from
+
+Five funding channels feed park capital projects. The graphic surfaces all five.
+
+- **Council "Reso A" capital.** Each of the 51 council members has discretionary capital to allocate to physical infrastructure in their district. Pooling Reso A across multiple members is common for larger jobs.
+- **Borough president capital.** By NYC Charter, **5% of total city capital appropriations** are reserved for the five borough presidents, distributed among them by a population/area formula. Historically about 46% of borough president capital has gone to parks, libraries, and cultural sites (per the 2013–2016 Capital Commitment Plan).
+- **Mayoral strategic initiatives.** Top-down programs that target citywide needs or correct discretionary inequities. Examples: **Community Parks Initiative (CPI)** — over $300M directed to 67 underserved parks; **Anchor Parks** — $30M each to one major park per borough.
+- **Participatory Budgeting (PBNYC).** In opt-in council districts, residents (age 11+) directly vote on at least $1M of the council member's capital. Strong fit for $50K–$1M neighborhood improvements (basketball courts, spray showers).
+- **Conservancies and "Friends of" groups.** Major-park conservancies (Central, Prospect, Riverside) raise private donations and can sometimes execute work faster than city procurement allows. Smaller "Friends of" groups mostly serve as an advocacy/lobbying engine for Reso A funding.
 
 ## Initial vs. supplemental funding
 
@@ -64,6 +82,17 @@ This is the most underdocumented part of the process. Key points, all sourced or
 - **"Median 4.3 years" comes from secondary research, not a fresh dataset.** A direct calculation against the NYC Parks Capital Tracker is a future improvement.
 - **Phase boundaries blur in practice.** Design can begin before all funding is registered; bidding can overlap with final design (especially on DDC projects). The infographic shows them sequentially because that is the legal default and the most common pattern.
 - **Discretionary capital figures shift annually.** The roughly $50M/year in Council parks discretionary is approximate; the per-member minimum allocation rule has changed over budget cycles.
+
+## Other figures cited in the graphic
+
+- **OMB "Certificate to Proceed."** Required before bidding. OMB confirms the project is capitally eligible and adequately funded. A common bottleneck when bids come in over budget.
+- **80% of city contracts arrive at the Comptroller "retroactive"** (their planned start date has already passed by the time they reach final registration). Source: Capital Process Reform Task Force.
+- **Up to $200,000 per month per stalled project** in costs from utility-conflict disputes. Source: Capital Process Reform Task Force.
+- **Cross-agency permits** (Department of Environmental Protection, Department of Buildings, Department of Transportation, Landmarks Preservation Commission) can add 3 to 9 months to design and review.
+
+## Companion document
+
+The full underlying research report is preserved at `research-report.md` in this repo. It covers the dual budget framework (capital vs. expense), the 1% for Parks advocacy campaign, the "capital rich, expense poor" maintenance gap, structural reform efforts (Capital Process Reform Task Force, Pre-Qualified Lists), and step-by-step advocacy guidance for community groups.
 
 ## Sources (all linked from infographic footer)
 
