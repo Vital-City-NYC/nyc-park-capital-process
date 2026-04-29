@@ -135,8 +135,10 @@
     height: 30px;
     border: 1px solid var(--vc-black);
     margin-bottom: 8px;
+    position: relative;
   }
   .timeline-seg {
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -145,8 +147,57 @@
     font-weight: 700;
     color: var(--vc-black);
     border-right: 1px solid var(--vc-black);
+    cursor: help;
+    transition: filter 120ms;
   }
   .timeline-seg:last-child { border-right: none; }
+  .timeline-seg:hover { filter: brightness(0.92); }
+
+  /* Custom tooltip */
+  .timeline-seg::before,
+  .timeline-seg::after {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 120ms;
+  }
+  .timeline-seg::before {
+    content: attr(data-name) " · " attr(data-dur);
+    position: absolute;
+    bottom: calc(100% + 10px);
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--vc-black);
+    color: var(--vc-white);
+    font-family: var(--vc-font-sans);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    padding: 7px 10px;
+    white-space: nowrap;
+    z-index: 10;
+    text-transform: none;
+  }
+  .timeline-seg::after {
+    content: '';
+    position: absolute;
+    bottom: calc(100% + 4px);
+    left: 50%;
+    transform: translateX(-50%);
+    border: 6px solid transparent;
+    border-top-color: var(--vc-black);
+    z-index: 10;
+  }
+  .timeline-seg:hover::before,
+  .timeline-seg:hover::after,
+  .timeline-seg:focus::before,
+  .timeline-seg:focus::after {
+    opacity: 1;
+  }
+  /* Edge-clamping for first/last segment tooltips */
+  .timeline-seg:first-child::before { left: 0; transform: none; }
+  .timeline-seg:first-child::after { left: 14px; transform: none; }
+  .timeline-seg:last-child::before { left: auto; right: 0; transform: none; }
+  .timeline-seg:last-child::after { left: auto; right: 14px; transform: none; }
   .timeline-seg.s1 { background: var(--vc-orange-20); flex: 2; }
   .timeline-seg.s2 { background: var(--vc-orange-50); flex: 9; }
   .timeline-seg.s3 { background: var(--vc-orange); color: var(--vc-white); flex: 18; }
@@ -482,11 +533,11 @@
       <span class="right">~4.3 yrs median &middot; 3 to 8+ yr range</span>
     </div>
     <div class="timeline-bar" role="img" aria-label="Five phases scaled by typical duration in months">
-      <div class="timeline-seg s1" title="Identify and scope: 1 to 3 months">1</div>
-      <div class="timeline-seg s2" title="Fund and adopt: 6 to 12 months">2</div>
-      <div class="timeline-seg s3" title="Design and review: 12 to 24 months">3</div>
-      <div class="timeline-seg s4" title="Bid and contract: 9 to 12 months">4</div>
-      <div class="timeline-seg s5" title="Build and open: 12 to 24 months">5</div>
+      <div class="timeline-seg s1" tabindex="0" data-name="Identify and scope" data-dur="1–3 months">1</div>
+      <div class="timeline-seg s2" tabindex="0" data-name="Fund and adopt" data-dur="6–12 months">2</div>
+      <div class="timeline-seg s3" tabindex="0" data-name="Design and review" data-dur="12–24 months">3</div>
+      <div class="timeline-seg s4" tabindex="0" data-name="Bid and contract" data-dur="9–12 months">4</div>
+      <div class="timeline-seg s5" tabindex="0" data-name="Build and open" data-dur="12–24 months">5</div>
     </div>
     <div class="timeline-axis">
       <span>Year 0</span>
