@@ -311,6 +311,87 @@
   }
   .timeline-note strong { color: var(--vc-black); font-weight: 700; }
 
+  /* Phase summary list (card 2) */
+  .phase-summary {
+    margin-top: 14px;
+    border-top: 1px solid var(--vc-black);
+  }
+  .ps-row {
+    display: grid;
+    grid-template-columns: 30px 1fr auto;
+    gap: 14px;
+    align-items: baseline;
+    padding: 7px 0;
+    border-bottom: 1px solid var(--vc-cloud);
+  }
+  .ps-row:last-child { border-bottom: none; }
+  .ps-num {
+    font-family: var(--vc-font-serif);
+    font-size: 22px;
+    line-height: 1;
+    color: var(--vc-orange);
+    letter-spacing: -0.02em;
+  }
+  .ps-name {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--vc-black);
+  }
+  .ps-desc {
+    display: block;
+    font-size: 11.5px;
+    color: var(--vc-charcoal);
+    line-height: 1.4;
+    margin-top: 1px;
+    font-weight: 300;
+  }
+  .ps-dur {
+    font-family: var(--vc-font-sans);
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: var(--vc-track-kicker);
+    color: var(--vc-black);
+    white-space: nowrap;
+  }
+
+  /* By-the-numbers strip (phase cards) */
+  .ph-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    margin: 4px 0 12px;
+    border-top: 1px solid var(--vc-black);
+    border-bottom: 1px solid var(--vc-black);
+  }
+  .ph-stat {
+    padding: 10px 12px 10px 0;
+    border-right: 1px solid var(--vc-cloud);
+  }
+  .ph-stat:last-child { border-right: none; padding-left: 12px; padding-right: 0; }
+  .ph-stat-label {
+    font-family: var(--vc-font-sans);
+    font-size: 9.5px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: var(--vc-track-kicker);
+    color: var(--vc-charcoal);
+    margin-bottom: 4px;
+  }
+  .ph-stat-num {
+    font-family: var(--vc-font-serif);
+    font-size: 22px;
+    line-height: 1;
+    color: var(--vc-black);
+    letter-spacing: -0.02em;
+    margin-bottom: 4px;
+  }
+  .ph-stat-text {
+    font-size: 11.5px;
+    line-height: 1.4;
+    color: var(--vc-charcoal);
+  }
+
   /* ================== TABLE ROWS (cards 3 and 5) ================== */
   .rows {
     margin: 0;
@@ -602,8 +683,47 @@
       <div class="timeline-axis">
         <span>Year 0</span><span>Year 1</span><span>Year 2</span><span>Year 3</span><span>Year 4+</span>
       </div>
-      <div class="timeline-note">
-        Design, bidding, and construction together absorb most of the clock. <strong>Phase 3 (design and review)</strong> and <strong>Phase 5 (build and open)</strong> alone routinely run a year to two each, before any delays.
+      <div class="phase-summary">
+        <div class="ps-row">
+          <div class="ps-num">1</div>
+          <div>
+            <span class="ps-name">Identify and scope</span>
+            <span class="ps-desc">A community need surfaces; DPR scopes the work and prepares a cost estimate.</span>
+          </div>
+          <div class="ps-dur">1–3 mo</div>
+        </div>
+        <div class="ps-row">
+          <div class="ps-num">2</div>
+          <div>
+            <span class="ps-name">Fund and adopt</span>
+            <span class="ps-desc">Money is allocated through the city budget cycle and registered by the Comptroller.</span>
+          </div>
+          <div class="ps-dur">6–12 mo</div>
+        </div>
+        <div class="ps-row">
+          <div class="ps-num">3</div>
+          <div>
+            <span class="ps-name">Design and review</span>
+            <span class="ps-desc">Designers iterate from concept to final drawings, clearing community, design commission, and agency reviews.</span>
+          </div>
+          <div class="ps-dur">12–24 mo</div>
+        </div>
+        <div class="ps-row">
+          <div class="ps-num">4</div>
+          <div>
+            <span class="ps-name">Bid and contract</span>
+            <span class="ps-desc">OMB clears the project to proceed; sealed bids open; the Comptroller registers the winning contract.</span>
+          </div>
+          <div class="ps-dur">9–12 mo</div>
+        </div>
+        <div class="ps-row">
+          <div class="ps-num">5</div>
+          <div>
+            <span class="ps-name">Build and open</span>
+            <span class="ps-desc">Mobilization, construction, punch list, ribbon cutting.</span>
+          </div>
+          <div class="ps-dur">12–24 mo</div>
+        </div>
       </div>
     </section>
 
@@ -740,6 +860,16 @@
         <li>Department of Parks and Recreation (DPR) Capital Projects scopes the work and prepares a cost estimate.</li>
         <li>An elected official or agency sponsor agrees to carry it into the budget.</li>
       </ul>
+      <div class="ph-stats">
+        <div class="ph-stat">
+          <div class="ph-stat-num">59</div>
+          <div class="ph-stat-text">Community boards across NYC, each compiling its own annual list of needs.</div>
+        </div>
+        <div class="ph-stat">
+          <div class="ph-stat-num">40</div>
+          <div class="ph-stat-text">Capital requests each board can submit per year. Most never get funded.</div>
+        </div>
+      </div>
       <div class="stall"><strong>What can stall it</strong>Cost estimate too low to be credible, or no elected official willing to sponsor.</div>
     </section>
 
@@ -765,6 +895,16 @@
         <li>Project moves through Preliminary, Executive, and Adopted budget stages (February through June).</li>
         <li>Comptroller registers the funds. Most projects come back for at least one supplemental in a later year.</li>
       </ul>
+      <div class="ph-stats">
+        <div class="ph-stat">
+          <div class="ph-stat-num">~$50M</div>
+          <div class="ph-stat-text">Council "Reso A" pool per year, split across 51 members; ~$500K minimum per parks project.</div>
+        </div>
+        <div class="ph-stat">
+          <div class="ph-stat-num">5%</div>
+          <div class="ph-stat-text">Of all citywide capital is reserved by charter for the five borough presidents.</div>
+        </div>
+      </div>
       <div class="stall"><strong>What can stall it</strong>Initial allocation comes in below the project's true cost; design is funded but construction is not, leaving the project on the shelf.</div>
     </section>
 
@@ -790,6 +930,16 @@
         <li>Public Design Commission reviews; community board reviews; Landmarks Preservation Commission reviews if the site is historic.</li>
         <li>Final contract documents are produced for bidding.</li>
       </ul>
+      <div class="ph-stats">
+        <div class="ph-stat">
+          <div class="ph-stat-num">2–6 mo</div>
+          <div class="ph-stat-text">Typical Public Design Commission review window. Major revisions trigger a second submission.</div>
+        </div>
+        <div class="ph-stat">
+          <div class="ph-stat-num">3–9 mo</div>
+          <div class="ph-stat-text">Added by cross-agency permits — Environmental Protection, Buildings, Transportation, sometimes Landmarks.</div>
+        </div>
+      </div>
       <div class="stall"><strong>What can stall it</strong>Cross-agency permits (Environmental Protection, Buildings, Transportation) can add 3 to 9 months on their own; major revisions force a return trip to the design commission.</div>
     </section>
 
@@ -816,6 +966,16 @@
         <li>Project is publicly advertised; sealed bids open; lowest responsible, responsive bidder wins.</li>
         <li>Contract is registered with the Comptroller. Roughly 80% of city contracts arrive at the Comptroller's office already past their planned start date.</li>
       </ul>
+      <div class="ph-stats">
+        <div class="ph-stat">
+          <div class="ph-stat-num">80%</div>
+          <div class="ph-stat-text">Of city contracts arrive at the Comptroller's office already past their planned start date.</div>
+        </div>
+        <div class="ph-stat">
+          <div class="ph-stat-num">2 gates</div>
+          <div class="ph-stat-text">Money is registered with the Comptroller twice — once on funding, once on the contract.</div>
+        </div>
+      </div>
       <div class="stall"><strong>What can stall it</strong>All bids come in over budget, sending the project back to OMB for more money or back to design for a rescope; awarded contractor defaults.</div>
     </section>
 
@@ -839,6 +999,16 @@
         <li>Punch list and final inspections.</li>
         <li>Acceptance, sign-off, ribbon cutting.</li>
       </ul>
+      <div class="ph-stats">
+        <div class="ph-stat">
+          <div class="ph-stat-num">$200K/mo</div>
+          <div class="ph-stat-text">Cost per stalled project from utility-conflict disputes (Capital Process Reform Task Force).</div>
+        </div>
+        <div class="ph-stat">
+          <div class="ph-stat-num">63%</div>
+          <div class="ph-stat-text">Of delayed citywide capital projects also went over budget (State Comptroller, 2025).</div>
+        </div>
+      </div>
       <div class="stall"><strong>What can stall it</strong>Utility conflicts and unmapped infrastructure underground — the single largest driver of parks delays. The Capital Process Reform Task Force estimated such disputes can cost up to $200,000 per month per stalled project.</div>
     </section>
 
