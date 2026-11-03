@@ -17,7 +17,7 @@ This infographic visualizes the typical lifecycle of a publicly funded NYC park 
 | 4 | Bid and contract | 9–12 months | NYC Procurement Policy Board rules; DDC/DPR norms |
 | 5 | Build and open | 12–24 months | NYC Parks Capital Tracker; State Comptroller 2025 review |
 
-Durations are typical ranges, not guarantees. The timeline strip is scaled by the **midpoint** of each phase's range to give an honest visual sense of relative weight.
+Durations are typical ranges, not guarantees. The timeline strip is scaled by the **midpoint** of each phase's range to show each phase's relative length.
 
 ## Cost ranges by project type
 
@@ -57,7 +57,7 @@ Five funding channels feed park capital projects. The graphic surfaces all five.
 
 ## Initial vs. supplemental funding
 
-This is the most underdocumented part of the process. Key points, all sourced or flagged as approximate:
+Little public documentation covers this part of the process. Each point below is sourced or flagged as approximate:
 
 - **Initial allocations are placeholders.** Projects enter the Ten-Year Capital Strategy at amounts that often pre-date scoping and rarely reflect final cost. There is no public dataset of initial-vs-final cost ratios for Parks projects.
 - **Supplementals are the norm.** When designs price out high, when bids land over budget, or when construction discovers unmapped utilities, projects come back for additional appropriation in a later budget cycle. Council members frequently top up stalled projects with discretionary capital. The **share** of Parks projects requiring supplementals is not transparently tracked.
